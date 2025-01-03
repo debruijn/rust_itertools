@@ -15,8 +15,10 @@ def derangements_range_py(n):
     """
     if n == 2:
         yield 1, 0
-    elif n <= 1:
+    elif n == 1:
         yield from []
+    elif n == 0:
+        yield ()
     else:
         lag1 = derangements_range_py(n - 1)
         for lag in lag1:
@@ -39,14 +41,14 @@ def test_derangement_range(k):
 
 @pytest.mark.parametrize('k', [0, 1, 2, 3, 4, 8, 9])
 def test_derangements(k):
-    assert len(derangements(range(k))) == len(list(derangements_range(k)))
+    assert len(derangements(range(k), k)) == len(list(derangements_range(k)))
 
 
 @pytest.mark.parametrize('k', [0, 1, 2, 3, 4, 8, 9])
 def test_permutations(k):
-    assert len(permutations(range(k))) == len(list(permutations_py(range(k))))
+    assert len(permutations(range(k), k)) == len(list(permutations_py(range(k))))
 
 
 @pytest.mark.parametrize('k', [0, 1, 2, 3, 4, 8, 9])
 def test_distinct_permutations(k):
-    assert len(distinct_permutations(range(k))) == len(list(distinct_permutations_py(range(k))))
+    assert len(distinct_permutations(range(k), k)) == len(list(distinct_permutations_py(range(k))))

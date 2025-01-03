@@ -10,7 +10,7 @@ fn derangements_range(n: T) -> Vec<Vec<T>> {
     match n {
         2 => vec![vec![1, 0]],
         1 => Vec::new(),
-        0 => Vec::new(),
+        0 => vec![Vec::new()],
         _ => {
             let mut derangements = Vec::new();
             let lag1 = derangements_range(n - 1);
