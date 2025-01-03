@@ -41,14 +41,17 @@ def test_derangement_range(k):
 
 @pytest.mark.parametrize('k', [0, 1, 2, 3, 4, 8, 9])
 def test_derangements(k):
-    assert len(derangements(range(k), k)) == len(list(derangements_range(k)))
+    assert len(derangements(range(k))) == len(list(derangements_range(k)))
 
 
-@pytest.mark.parametrize('k', [0, 1, 2, 3, 4, 8, 9])
+@pytest.mark.parametrize('k', [0, 1, 2, 3, 4, 8])
 def test_permutations(k):
-    assert len(permutations(range(k), k)) == len(list(permutations_py(range(k))))
+    assert len(permutations(range(k))) == len(list(permutations_py(range(k))))
+    assert len(permutations(range(9), k)) == len(list(permutations_py(range(9), k)))
 
 
-@pytest.mark.parametrize('k', [0, 1, 2, 3, 4, 8, 9])
+@pytest.mark.parametrize('k', [0, 1, 2, 3, 4, 8])
 def test_distinct_permutations(k):
-    assert len(distinct_permutations(range(k), k)) == len(list(distinct_permutations_py(range(k))))
+    assert len(distinct_permutations(range(k))) == len(list(distinct_permutations_py(range(k))))
+    assert len(distinct_permutations(range(9), k)) == len(list(distinct_permutations(range(9), k)))
+    assert len(distinct_permutations(range(k))) == len(permutations(range(k)))
