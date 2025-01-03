@@ -72,14 +72,14 @@ fn derangements_range(n: T) -> Vec<Vec<T>> {
 //         .collect_vec()
 // }
 //
-// #[pyfunction]
-// fn derangements<'a>(iterable: Vec<T>, k: T) -> Vec<Vec<T>> {
-//     iterable
-//         .into_iter()
-//         .permutations(k as usize)
-//         .filter(|i| !i.iter().enumerate().any(|x| x.0 == *x.1 as usize))
-//         .collect_vec()
-// }
+#[pyfunction]
+fn derangements<'a>(iterable: Vec<T>, k: T) -> Vec<Vec<T>> {
+    iterable
+        .into_iter()
+        .permutations(k as usize)
+        .filter(|i| !i.iter().enumerate().any(|x| x.0 == *x.1 as usize))
+        .collect_vec()
+}
 //
 // #[pyfunction]
 // fn combinations<'a>(iterable: Vec<T>, k: T) -> Vec<Vec<T>> {
@@ -117,7 +117,7 @@ const VERSION: &str = env!("CARGO_PKG_VERSION");
 pub fn _rust_itertools(m: &Bound<'_, PyModule>) -> PyResult<()> {
 //     m.add_function(wrap_pyfunction!(permutations, m)?)?;
 //     m.add_function(wrap_pyfunction!(distinct_permutations, m)?)?;
-//     m.add_function(wrap_pyfunction!(derangements, m)?)?;
+    m.add_function(wrap_pyfunction!(derangements, m)?)?;
 //     m.add_function(wrap_pyfunction!(combinations, m)?)?;
 //     m.add_function(wrap_pyfunction!(combinations_with_replacement, m)?)?;
 //     m.add_function(wrap_pyfunction!(pairwise, m)?)?;

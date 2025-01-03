@@ -1,5 +1,5 @@
 [package]
-name = "_rust_itertools"
+name = "rust_itertools"
 version = "0.0.1"
 edition = "2021"
 description = "Rust-to-python wrapper around itertools"
