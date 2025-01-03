@@ -1,8 +1,7 @@
-
-use pyo3::prelude::*;
-use itertools::{repeat_n, Itertools};
-use pyo3::{pyfunction};
 use itertools;
+use itertools::{repeat_n, Itertools};
+use pyo3::prelude::*;
+use pyo3::pyfunction;
 
 type T = u8;
 
@@ -59,7 +58,6 @@ fn derangements_range(n: T) -> Vec<Vec<T>> {
     }
 }
 
-
 #[pyfunction]
 fn permutations<'a>(iterable: Vec<T>, k: T) -> Vec<Vec<T>> {
     iterable.into_iter().permutations(k as usize).collect_vec()
@@ -67,12 +65,20 @@ fn permutations<'a>(iterable: Vec<T>, k: T) -> Vec<Vec<T>> {
 
 #[pyfunction]
 fn distinct_permutations<'a>(iterable: Vec<T>, k: T) -> Vec<Vec<T>> {
-    iterable.into_iter().permutations(k as usize).unique().collect_vec()
+    iterable
+        .into_iter()
+        .permutations(k as usize)
+        .unique()
+        .collect_vec()
 }
 
 #[pyfunction]
 fn derangements<'a>(iterable: Vec<T>, k: T) -> Vec<Vec<T>> {
-    iterable.into_iter().permutations(k as usize).filter(|i| !i.iter().enumerate().any(|x| x.0 == *x.1 as usize)).collect_vec()
+    iterable
+        .into_iter()
+        .permutations(k as usize)
+        .filter(|i| !i.iter().enumerate().any(|x| x.0 == *x.1 as usize))
+        .collect_vec()
 }
 
 #[pyfunction]
@@ -82,7 +88,10 @@ fn combinations<'a>(iterable: Vec<T>, k: T) -> Vec<Vec<T>> {
 
 #[pyfunction]
 fn combinations_with_replacement<'a>(iterable: Vec<T>, k: T) -> Vec<Vec<T>> {
-    iterable.into_iter().combinations_with_replacement(k as usize).collect_vec()
+    iterable
+        .into_iter()
+        .combinations_with_replacement(k as usize)
+        .collect_vec()
 }
 
 #[pyfunction]
@@ -94,7 +103,6 @@ fn pairwise<'a>(iterable: Vec<T>) -> Vec<(T, T)> {
 fn repeat<'a>(n: T, k: T) -> Vec<T> {
     repeat_n(n, k as usize).collect_vec()
 }
-
 
 #[pyfunction]
 fn powerset<'a>(iterable: Vec<T>) -> Vec<Vec<T>> {
@@ -115,10 +123,3 @@ pub fn rust_itertools(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(derangements_range, m)?)?;
     Ok(())
 }
-//
-// #[pymodule]
-// #[pyo3(name = "rust_itertools_all")]
-// pub fn rust_itertools_all(m: &Bound<'_, PyModule>) -> PyResult<()> {
-//     m.add_submodule(wrap_pymodule!(itertools)?)?;
-//     Ok(())
-// }
