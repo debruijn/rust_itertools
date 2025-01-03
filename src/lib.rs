@@ -1,5 +1,5 @@
+use itertools::repeat_n;
 use itertools::Itertools;
-// use itertools::{repeat_n, Itertools};
 use pyo3::prelude::*;
 use pyo3::pyfunction;
 
@@ -80,48 +80,48 @@ fn derangements(iterable: Vec<T>, k: T) -> Vec<Vec<T>> {
         .filter(|i| !i.iter().enumerate().any(|x| x.0 == *x.1 as usize))
         .collect_vec()
 }
-//
-// #[pyfunction]
-// fn combinations(iterable: Vec<T>, k: T) -> Vec<Vec<T>> {
-//     iterable.into_iter().combinations(k as usize).collect_vec()
-// }
-//
-// #[pyfunction]
-// fn combinations_with_replacement(iterable: Vec<T>, k: T) -> Vec<Vec<T>> {
-//     iterable
-//         .into_iter()
-//         .combinations_with_replacement(k as usize)
-//         .collect_vec()
-// }
-//
-// #[pyfunction]
-// fn pairwise(iterable: Vec<T>) -> Vec<(T, T)> {
-//     iterable.into_iter().tuple_windows().collect()
-// }
-//
-// #[pyfunction]
-// fn repeat(n: T, k: T) -> Vec<T> {
-//     repeat_n(n, k as usize).collect_vec()
-// }
-//
-// #[pyfunction]
-// fn powerset(iterable: Vec<T>) -> Vec<Vec<T>> {
-//     iterable.into_iter().powerset().collect_vec()
-// }
+
+#[pyfunction]
+fn combinations(iterable: Vec<T>, k: T) -> Vec<Vec<T>> {
+    iterable.into_iter().combinations(k as usize).collect_vec()
+}
+
+#[pyfunction]
+fn combinations_with_replacement(iterable: Vec<T>, k: T) -> Vec<Vec<T>> {
+    iterable
+        .into_iter()
+        .combinations_with_replacement(k as usize)
+        .collect_vec()
+}
+
+#[pyfunction]
+fn pairwise(iterable: Vec<T>) -> Vec<(T, T)> {
+    iterable.into_iter().tuple_windows().collect()
+}
+
+#[pyfunction]
+fn repeat(n: T, k: T) -> Vec<T> {
+    repeat_n(n, k as usize).collect_vec()
+}
+
+#[pyfunction]
+fn powerset(iterable: Vec<T>) -> Vec<Vec<T>> {
+    iterable.into_iter().powerset().collect_vec()
+}
 
 const VERSION: &str = env!("CARGO_PKG_VERSION");
 
 #[pymodule]
 pub fn _rust_itertools(m: &Bound<'_, PyModule>) -> PyResult<()> {
+    m.add("VERSION", VERSION)?;
     m.add_function(wrap_pyfunction!(permutations, m)?)?;
     m.add_function(wrap_pyfunction!(distinct_permutations, m)?)?;
     m.add_function(wrap_pyfunction!(derangements, m)?)?;
-    //     m.add_function(wrap_pyfunction!(combinations, m)?)?;
-    //     m.add_function(wrap_pyfunction!(combinations_with_replacement, m)?)?;
-    //     m.add_function(wrap_pyfunction!(pairwise, m)?)?;
-    //     m.add_function(wrap_pyfunction!(repeat, m)?)?;
-    //     m.add_function(wrap_pyfunction!(powerset, m)?)?;
-    m.add("VERSION", VERSION)?;
+    m.add_function(wrap_pyfunction!(combinations, m)?)?;
+    m.add_function(wrap_pyfunction!(combinations_with_replacement, m)?)?;
+    m.add_function(wrap_pyfunction!(pairwise, m)?)?;
+    m.add_function(wrap_pyfunction!(repeat, m)?)?;
+    m.add_function(wrap_pyfunction!(powerset, m)?)?;
     m.add_function(wrap_pyfunction!(derangements_range, m)?)?;
     Ok(())
 }
