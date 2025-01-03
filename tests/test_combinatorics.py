@@ -1,6 +1,8 @@
+from itertools import permutations as permutations_py
+
 import pytest
 
-from rust_itertools import derangements_range
+from rust_itertools import derangements, derangements_range, permutations  # , distinct_permutations
 
 
 def derangements_range_py(n):
@@ -32,3 +34,13 @@ def derangements_range_py(n):
 @pytest.mark.parametrize('k', [0, 1, 2, 3, 4, 8, 9])
 def test_derangement_range(k):
     assert len(derangements_range(k)) == len(list(derangements_range_py(k)))
+
+
+@pytest.mark.parametrize('k', [0, 1, 2, 3, 4, 8, 9])
+def test_derangements(k):
+    assert len(derangements(range(k))) == len(list(derangements_range(k)))
+
+
+@pytest.mark.parametrize('k', [0, 1, 2, 3, 4, 8, 9])
+def test_permutations(k):
+    assert len(permutations(range(k))) == len(list(permutations_py(range(k))))
