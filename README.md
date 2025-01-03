@@ -26,3 +26,12 @@ There are some exceptions though, especially for:
 
 Next to this, you can use this repository for functionality not available in Python's `itertools` or if you prefer
 the way the Rust version is setup.
+
+## Acknowledgements
+The Github Actions setup to automatically crossbuild Python packages across operating systems has been based on the
+setup in the [rtoml](https://github.com/samuelcolvin/rtoml) project (although first using the old `setuptools` based
+setup, because of the link on the `setuptools-rust` page..).
+
+Of course, also credit to the Rust `itertools` [project](https://github.com/rust-itertools/itertools) and inspiration
+from the [more-itertools](https://github.com/more-itertools/more-itertools) and of course the core Python itertools
+projects.
