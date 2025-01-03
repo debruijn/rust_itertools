@@ -1,6 +1,6 @@
 [package]
-name = "rust_itertools"
-version = "0.1.0"
+name = "_rust_itertools"
+version = "0.0.1"
 edition = "2021"
 description = "Rust-to-python wrapper around itertools"
 license = "MIT"
@@ -18,7 +18,7 @@ version = "0.22.3"
 features = ["abi3-py310"]
 
 [lib]
-name = "rust_itertools"
+name = "_rust_itertools"
 path = "src/lib.rs"
 # "cdylib" is necessary to produce a shared library for Python to import from.
 crate-type = ["cdylib"]
