@@ -1,5 +1,6 @@
-from typing import Iterable
+from collections.abc import Iterable
 
 VERSION: str
+
 def derangements_range(n: int) -> list[list[int]]: ...
 def derangements(iterable: Iterable, k: int) -> list[list[int]]: ...
