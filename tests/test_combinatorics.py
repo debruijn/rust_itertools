@@ -1,9 +1,17 @@
-from itertools import permutations as permutations_py
+import itertools
 
+import more_itertools
 import pytest
-from more_itertools import distinct_permutations as distinct_permutations_py
 
-from rust_itertools import derangements, derangements_range, distinct_permutations, permutations
+from rust_itertools import (
+    combinations,
+    combinations_with_replacement,
+    derangements,
+    derangements_range,
+    distinct_permutations,
+    permutations,
+    powerset,
+)
 
 
 def derangements_range_py(n):
@@ -11,7 +19,6 @@ def derangements_range_py(n):
 
     >>> sorted(derangements_range_py(3))
     [(1, 2, 0), (2, 0, 1)]
-
     """
     if n == 2:
         yield 1, 0
@@ -46,12 +53,29 @@ def test_derangements(k):
 
 @pytest.mark.parametrize('k', [0, 1, 2, 3, 4, 8])
 def test_permutations(k):
-    assert len(permutations(range(k))) == len(list(permutations_py(range(k))))
-    assert len(permutations(range(9), k)) == len(list(permutations_py(range(9), k)))
+    assert len(permutations(range(k))) == len(list(itertools.permutations(range(k))))
+    assert len(permutations(range(9), k)) == len(list(itertools.permutations(range(9), k)))
 
 
 @pytest.mark.parametrize('k', [0, 1, 2, 3, 4, 8])
 def test_distinct_permutations(k):
-    assert len(distinct_permutations(range(k))) == len(list(distinct_permutations_py(range(k))))
+    assert len(distinct_permutations(range(k))) == len(list(more_itertools.distinct_permutations(range(k))))
     assert len(distinct_permutations(range(9), k)) == len(list(distinct_permutations(range(9), k)))
     assert len(distinct_permutations(range(k))) == len(permutations(range(k)))
+
+
+@pytest.mark.parametrize('k', [0, 1, 2, 3, 4, 8])
+def test_combinations(k):
+    assert len(combinations(range(9), k)) == len(list(itertools.combinations(range(9), k)))
+
+
+@pytest.mark.parametrize('k', [0, 1, 2, 3, 4, 8])
+def test_combinations_with_replacement(k):
+    assert len(combinations_with_replacement(range(9), k)) == len(
+        list(itertools.combinations_with_replacement(range(9), k))
+    )
+
+
+@pytest.mark.parametrize('k', [0, 1, 2, 3, 4, 8])
+def test_powerset(k):
+    assert len(powerset(range(k))) == len(list(more_itertools.powerset(range(k))))

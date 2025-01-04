@@ -30,14 +30,8 @@ def distinct_permutations(x, k=None):
     return _rust_itertools.distinct_permutations(x, len(x) if k is None else k)
 
 
-def combinations(x, k=None):
-    return _rust_itertools.combinations(x, len(x) if k is None else k)
-
-
-def combinations_with_replacement(x, k=None):
-    return _rust_itertools.combinations_with_replacement(x, len(x) if k is None else k)
-
-
+combinations = _rust_itertools.combinations
+combinations_with_replacement = _rust_itertools.combinations_with_replacement
 pairwise = _rust_itertools.pairwise
 repeat = _rust_itertools.repeat
 powerset = _rust_itertools.powerset
