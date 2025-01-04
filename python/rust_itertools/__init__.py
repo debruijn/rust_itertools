@@ -1,4 +1,4 @@
-from collections.abc import Sized
+from collections.abc import Iterable, Sized
 from typing import Any
 
 from . import _rust_itertools
@@ -25,23 +25,24 @@ def derangements(iterable: Sized, k: int | None = None) -> list[list[Any]]:
     return _rust_itertools.derangements(iterable, len(iterable) if k is None else k)
 
 
-def permutations(iterable: Sized, k: int | None = None) -> list[list[Any]]:
-    return _rust_itertools.permutations(list(iterable), len(iterable) if k is None else k)
+def permutations(iterable: Iterable[Any], k: int | None = None) -> list[list[Any]]:
+    iterable = list(iterable)
+    return _rust_itertools.permutations(iterable, len(iterable) if k is None else k)
 
 
 def distinct_permutations(iterable: Sized, k: int | None = None) -> list[list[Any]]:
     return _rust_itertools.distinct_permutations(iterable, len(iterable) if k is None else k)
 
 
-def combinations(iterable: Sized, k: int) -> list[list[Any]]:
+def combinations(iterable: Iterable[Any], k: int) -> list[list[Any]]:
     return _rust_itertools.combinations(list(iterable), k)
 
 
-def combinations_with_replacement(iterable: Sized, k: int) -> list[list[Any]]:
+def combinations_with_replacement(iterable: Iterable[Any], k: int) -> list[list[Any]]:
     return _rust_itertools.combinations_with_replacement(list(iterable), k)
 
 
-def powerset(iterable: Sized) -> list[list[Any]]:
+def powerset(iterable: Iterable[Any]) -> list[list[Any]]:
     return _rust_itertools.powerset(list(iterable))
 
 
