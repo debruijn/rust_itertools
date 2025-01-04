@@ -21,15 +21,15 @@ VERSION = _rust_itertools.VERSION
 derangements_range = _rust_itertools.derangements_range
 
 
-def derangements(iterable: Sized, k: int | None) -> list[list[Any]]:
+def derangements(iterable: Sized, k: int | None = None) -> list[list[Any]]:
     return _rust_itertools.derangements(iterable, len(iterable) if k is None else k)
 
 
-def permutations(iterable: Sized, k: int | None) -> list[list[Any]]:
+def permutations(iterable: Sized, k: int | None = None) -> list[list[Any]]:
     return _rust_itertools.permutations(iterable, len(iterable) if k is None else k)
 
 
-def distinct_permutations(iterable: Sized, k: int | None) -> list[list[Any]]:
+def distinct_permutations(iterable: Sized, k: int | None = None) -> list[list[Any]]:
     return _rust_itertools.distinct_permutations(iterable, len(iterable) if k is None else k)
 
 
