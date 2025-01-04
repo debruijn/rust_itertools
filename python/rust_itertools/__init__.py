@@ -26,15 +26,27 @@ def derangements(iterable: Sized, k: int | None = None) -> list[list[Any]]:
 
 
 def permutations(iterable: Sized, k: int | None = None) -> list[list[Any]]:
-    return _rust_itertools.permutations(iterable, len(iterable) if k is None else k)
+    return _rust_itertools.permutations(list(iterable), len(iterable) if k is None else k)
 
 
 def distinct_permutations(iterable: Sized, k: int | None = None) -> list[list[Any]]:
     return _rust_itertools.distinct_permutations(iterable, len(iterable) if k is None else k)
 
 
-combinations = _rust_itertools.combinations
-combinations_with_replacement = _rust_itertools.combinations_with_replacement
+def combinations(iterable: Sized, k: int) -> list[list[Any]]:
+    return _rust_itertools.combinations(list(iterable), k)
+
+
+def combinations_with_replacement(iterable: Sized, k: int) -> list[list[Any]]:
+    return _rust_itertools.combinations_with_replacement(list(iterable), k)
+
+
+def powerset(iterable: Sized) -> list[list[Any]]:
+    return _rust_itertools.powerset(list(iterable))
+
+
+# combinations = _rust_itertools.combinations
+# combinations_with_replacement = _rust_itertools.combinations_with_replacement
 pairwise = _rust_itertools.pairwise
 repeat = _rust_itertools.repeat
-powerset = _rust_itertools.powerset
+# powerset = _rust_itertools.powerset

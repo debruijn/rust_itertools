@@ -2,8 +2,9 @@ use itertools::repeat_n;
 use itertools::Itertools;
 use pyo3::prelude::*;
 use pyo3::pyfunction;
+use pyo3::types::PyList;
 
-type T = u8;
+type T = usize;
 
 #[pyfunction]
 fn derangements_range(n: T) -> Vec<Vec<T>> {
@@ -37,7 +38,7 @@ fn derangements_range(n: T) -> Vec<Vec<T>> {
                 for k in (0..n - 2).rev() {
                     let mut temp = Vec::new();
                     for (i, el) in temp2.iter_mut().enumerate() {
-                        if i as u8 == k {
+                        if i == k {
                             temp.push(n - 1);
                         }
                         if *el == k {
@@ -45,7 +46,7 @@ fn derangements_range(n: T) -> Vec<Vec<T>> {
                         }
                         temp.push(*el)
                     }
-                    if k == temp2.len() as u8 {
+                    if k == temp2.len() {
                         temp.push(n - 1)
                     }
                     temp.push(k);
@@ -59,53 +60,49 @@ fn derangements_range(n: T) -> Vec<Vec<T>> {
 }
 
 #[pyfunction]
-fn permutations(iterable: Vec<T>, k: T) -> Vec<Vec<T>> {
-    iterable.into_iter().permutations(k as usize).collect_vec()
+fn permutations(iterable: Bound<PyList>, k: T) -> Vec<Vec<Bound<PyAny>>> {
+    iterable.into_iter().permutations(k).collect_vec()
 }
 
-#[pyfunction]
+#[pyfunction] // TODO not yet Bound<PyList> due to unique() -> needs NewType that implements Clone, Hash and Eq
 fn distinct_permutations(iterable: Vec<T>, k: T) -> Vec<Vec<T>> {
-    iterable
-        .into_iter()
-        .permutations(k as usize)
-        .unique()
-        .collect_vec()
+    iterable.into_iter().permutations(k).unique().collect_vec()
 }
 
 #[pyfunction]
 fn derangements(iterable: Vec<T>, k: T) -> Vec<Vec<T>> {
     iterable
         .into_iter()
-        .permutations(k as usize)
-        .filter(|i| !i.iter().enumerate().any(|x| x.0 == *x.1 as usize))
+        .permutations(k)
+        .filter(|i| !i.iter().enumerate().any(|x| x.0 == *x.1))
         .collect_vec()
 }
 
 #[pyfunction]
-fn combinations(iterable: Vec<T>, k: T) -> Vec<Vec<T>> {
-    iterable.into_iter().combinations(k as usize).collect_vec()
+fn combinations(iterable: Bound<PyList>, k: T) -> Vec<Vec<Bound<PyAny>>> {
+    iterable.into_iter().combinations(k).collect_vec()
 }
 
 #[pyfunction]
-fn combinations_with_replacement(iterable: Vec<T>, k: T) -> Vec<Vec<T>> {
+fn combinations_with_replacement(iterable: Bound<PyList>, k: T) -> Vec<Vec<Bound<PyAny>>> {
     iterable
         .into_iter()
-        .combinations_with_replacement(k as usize)
+        .combinations_with_replacement(k)
         .collect_vec()
 }
 
 #[pyfunction]
-fn pairwise(iterable: Vec<T>) -> Vec<(T, T)> {
+fn pairwise(iterable: Bound<PyList>) -> Vec<(Bound<PyAny>, Bound<PyAny>)> {
     iterable.into_iter().tuple_windows().collect()
 }
 
 #[pyfunction]
-fn repeat(n: T, k: T) -> Vec<T> {
-    repeat_n(n, k as usize).collect_vec()
+fn repeat(n: Bound<PyAny>, k: T) -> Vec<Bound<PyAny>> {
+    repeat_n(n, k).collect_vec()
 }
 
 #[pyfunction]
-fn powerset(iterable: Vec<T>) -> Vec<Vec<T>> {
+fn powerset(iterable: Bound<PyList>) -> Vec<Vec<Bound<PyAny>>> {
     iterable.into_iter().powerset().collect_vec()
 }
 

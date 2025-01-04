@@ -35,3 +35,8 @@ setup, because of the link on the `setuptools-rust` page..).
 Of course, also credit to the Rust `itertools` [project](https://github.com/rust-itertools/itertools) and inspiration
 from the [more-itertools](https://github.com/more-itertools/more-itertools) and of course the core Python itertools
 projects.
+
+## Some big ideal TODO's
+- Add support for all functionality of any of the `itertools` packages
+- Make both a tuple and a list version of each method where applicable
+- Make an iterable PyClass (see https://pyo3.rs/v0.22.3/class/protocols#iterable-objects) that can be reused
