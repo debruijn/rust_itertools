@@ -15,6 +15,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 
 [[package]]
+name = "derangements"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5c6e36d7c9853cbb4ad081c4cee904672a41822fba36e59a719106e314ac4c85"
+dependencies = [
+ "itertools",
+]
+
+[[package]]
 name = "either"
 version = "1.13.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -153,6 +162,7 @@ dependencies = [
 name = "rust_itertools"
 version = "0.0.1"
 dependencies = [
+ "derangements",
  "itertools",
  "pyo3",
 ]
