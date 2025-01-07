@@ -46,8 +46,5 @@ def powerset(iterable: Iterable[Any]) -> list[list[Any]]:
     return _rust_itertools.powerset(list(iterable))
 
 
-# combinations = _rust_itertools.combinations
-# combinations_with_replacement = _rust_itertools.combinations_with_replacement
 pairwise = _rust_itertools.pairwise
 repeat = _rust_itertools.repeat
-# powerset = _rust_itertools.powerset
